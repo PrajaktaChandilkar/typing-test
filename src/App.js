@@ -1,11 +1,19 @@
 import styled from "styled-components";
+import TypingBox from "./components/TypingBox";
+import { GlobalStyles } from "./Styles/global"
 
-const Divi = styled.div`
-  color:red;
-`;
+
+var randomWords = require('random-words')
+
 function App() {
+  const words = randomWords(100)
   return (
-    <Divi>hii</Divi>
+    <div className="canvas">
+      <GlobalStyles />
+      <h1 style={{"text-align":"center"}}>Typingtest</h1>
+      <TypingBox  words = {words}/>
+      <h1 style={{"textAlign":"center"}}>Footer</h1>
+    </div>
   );
 }
 
