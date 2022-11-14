@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { createElement, createRef, useEffect, useRef, useState } from "react";
 const TypingBox = ({ words }) => {
 
     const [currentCharIndex, setCurrentCharIndex] = useState(0);
@@ -21,12 +21,12 @@ const TypingBox = ({ words }) => {
         // wordSpanRef[currentCharIndex+1];
     }, [])
     const handleKeyDown = (e) => {
-        console.log("key pressed", e.key)
+        // console.log("key pressed", e.key)
         // console.log(wordSpanRef[0].current);
 
         let allChildrenSpans = wordSpanRef[currentWordIndex].current.childNodes;
         // let allChildrenSpans = wordSpanRef[currentWordIndex].current.querySelector('span')
-        console.log(allChildrenSpans)
+        // console.log(allChildrenSpans)
 
         //logic for space
         if (e.keyCode === 32) {
@@ -55,24 +55,48 @@ const TypingBox = ({ words }) => {
             console.log('back key pressed');
 
             if (currentCharIndex !== 0) {
-                if(currentCharIndex === allChildrenSpans.length){
-                    allChildrenSpans[currentCharIndex-1].className='left-blinking-cursor'
-                    setCurrentCharIndex(currentCharIndex-1);
+                // console.log('charindex', currentCharIndex);
+                // console.log('wordspam',allChildrenSpans.length )
+                if (currentCharIndex===allChildrenSpans.length) {
+                    console.log('length',allChildrenSpans.length)
+                    //remove extra typed characters
+                    if(allChildrenSpans[currentCharIndex-1].className.includes('extra')){
+                        allChildrenSpans[currentCharIndex-1].remove();
+                        // allChildrenSpans[currentCharIndex-1].className = allChildrenSpans[currentCharIndex-1].className.replace('incorrect right-blinking-cursor extra', ' ');
+                        allChildrenSpans[currentCharIndex-2].className +=' right-blinking-cursor';
+                    }else{
+                        allChildrenSpans[currentCharIndex - 1].className = 'left-blinking-cursor'
+
+                    }
+                    setCurrentCharIndex(currentCharIndex - 1);
                     return;
                 }
-
+                console.log('left cur')
                 allChildrenSpans[currentCharIndex].className = '';
                 allChildrenSpans[currentCharIndex - 1].className = 'char left-blinking-cursor';
                 setCurrentCharIndex(currentCharIndex - 1);
             }
-             return
+            return
         }
-        //key logic
+        //lgic for extra character need to add
+        if(currentCharIndex===allChildrenSpans.length){
+            let newSpan = document.createElement('span');
+            newSpan.innerHTML=e.key;
+            newSpan.className='incorrect right-blinking-cursor extra';
+
+             wordSpanRef[currentWordIndex].current.append(newSpan);
+             setCurrentCharIndex(currentCharIndex+1);
+             allChildrenSpans[currentCharIndex-1].className=allChildrenSpans[currentCharIndex-1].className.replace('right-blinking-cursor','');
+            //  allChildrenSpans[currentCharIndex-1].className='incorrect';
+             return;
+        }
+
+        //key logic for correct and incorrect character
         if (e.key === allChildrenSpans[currentCharIndex].innerText) {
-            console.log('user pressed correct key')
+            // console.log('user pressed correct key')
             allChildrenSpans[currentCharIndex].className = 'correct'
         } else {
-            console.log("not correct")
+            // console.log("not correct")
             allChildrenSpans[currentCharIndex].className = 'incorrect'
         }
 

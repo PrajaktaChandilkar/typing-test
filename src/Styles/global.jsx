@@ -7,9 +7,11 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing:border-box;
     }
     body{
-        background-color: red;
+        background-color: black;
+        color: white;
         padding:0;
         margin:0;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
     .heading{
@@ -27,7 +29,7 @@ export const GlobalStyles = createGlobalStyle`
     }
     .type-box{
         display:block;
-        background:pink;
+        // background:pink;
         border: 1px solid black;
         radius: 20px;
         max-width: 1000px;
@@ -63,5 +65,30 @@ export const GlobalStyles = createGlobalStyle`
     }
     .incorrect{
         color:red;
+    }
+    .left-blinking-cursor{
+        border-left: 1px solid;
+        animation: blinking 2s infinite;
+        animation-timing-funcation: ease;
+        @keyframes blinking{
+            0% {border-left-color:white;}
+            25% {border-left-color:black;}
+            50% {border-left-color:white;}
+            75% {border-left-color:black;}
+            100% {border-left-color:white;}
+        }
+    }
+
+    .right-blinking-cursor{
+        border-right: 1px solid;
+        animation: blinkingRight 2s infinite;
+        animation-timing-funcation: ease;
+        @keyframes blinkingRight{
+            0% {border-right-color:white;}
+            25% {border-right-color:black;}
+            50% {border-right-color:white;}
+            75% {border-right-color:black;}
+            100% {border-right-color:white;}
+        }
     }
 `
