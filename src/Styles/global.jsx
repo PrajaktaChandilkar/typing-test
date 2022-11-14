@@ -91,4 +91,24 @@ export const GlobalStyles = createGlobalStyle`
             100% {border-right-color:white;}
         }
     }
+
+    .times-menu{
+        display: flex;
+        justify-content: space-between;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 20px; 
+        // padding-right: 
+    }
+
+    .choose-time{
+        display: flex;
+        gap: 10px;
+    }
+
+    .set-time:hover{
+        cursor:pointer;
+        color:#e3b04b;
+    }
 `

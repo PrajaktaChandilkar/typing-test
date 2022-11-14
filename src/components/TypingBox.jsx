@@ -1,9 +1,15 @@
 import React, { createElement, createRef, useEffect, useRef, useState } from "react";
+import TimeMenu from "./TimeMenu";
 const TypingBox = ({ words }) => {
 
     const [currentCharIndex, setCurrentCharIndex] = useState(0);
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
+    const [countDown, setCountDown] = useState(15)
+    const [testStart, setTestStart] = useState(false);
+    const [testOver, setTestOver] = useState(false);
+
     const inputTextRef = useRef(null);
+
     // console.log(inputTextRef)
 
     //create ref for each character
@@ -14,7 +20,22 @@ const TypingBox = ({ words }) => {
         inputTextRef.current.focus();
     }
 
+    //timer
+    const startTimer = () =>{
+        const intervalId = setInterval(timer, 1000);
 
+        //callback function
+        function timer(){
+            setCountDown((preCountDown)=>{
+                if(preCountDown === 1){
+                    clearInterval(intervalId);
+                    setCountDown(0);
+                    setTestOver(true)
+                }else
+                return preCountDown-1;
+            });
+        }
+    }
     useEffect(() => {
         focusInput()
         wordSpanRef[0].current.childNodes[0].className = "char left-blinking-cursor";
@@ -23,6 +44,10 @@ const TypingBox = ({ words }) => {
     const handleKeyDown = (e) => {
         // console.log("key pressed", e.key)
         // console.log(wordSpanRef[0].current);
+        if(!testStart){
+            startTimer();
+            setTestStart(true);
+        }
 
         let allChildrenSpans = wordSpanRef[currentWordIndex].current.childNodes;
         // let allChildrenSpans = wordSpanRef[currentWordIndex].current.querySelector('span')
@@ -114,17 +139,20 @@ const TypingBox = ({ words }) => {
 
     return (
         <>
+            <TimeMenu countDown ={countDown} />
+           {testOver ? (<h1>Game Over </h1>):(
             <div className="type-box" onClick={focusInput}>
-                <div className="words">
-                    {words.map((word, index) => (
-                        <span className="word" key={index} ref={wordSpanRef[index]}>
-                            {word.split('').map((character, idx) => (
-                                <span key={idx} >{character}</span>
-                            ))}
-                        </span>
-                    ))}
-                </div>
+            <div className="words">
+                {words.map((word, index) => (
+                    <span className="word" key={index} ref={wordSpanRef[index]}>
+                        {word.split('').map((character, idx) => (
+                            <span key={idx} >{character}</span>
+                        ))}
+                    </span>
+                ))}
             </div>
+        </div>)
+           }
             <input type="text" ref={inputTextRef} className="input-filed"
                 onKeyDown={(e) => handleKeyDown(e)}
             />
