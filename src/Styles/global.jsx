@@ -7,8 +7,8 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing:border-box;
     }
     body{
-        background-color: black;
-        color: white;
+        background-color: ${({theme})=>theme.background};
+        color:  ${({theme})=>theme.title};
         padding:0;
         margin:0;
         font-family: Arial, Helvetica, sans-serif;
@@ -25,12 +25,13 @@ export const GlobalStyles = createGlobalStyle`
         min-height:100vh;
         gap: 0.5rem;
         align-items: center;
+        border:none;
         // width: 100vh;
     }
     .type-box{
         display:block;
         // background:pink;
-        border: 1px solid black;
+        // border: 1px solid black;
         radius: 20px;
         max-width: 1000px;
         height: 155px;
@@ -48,6 +49,7 @@ export const GlobalStyles = createGlobalStyle`
         display:flex;
         flex-wrap: wrap;
         align-content:center;
+        color: ${({theme})=>theme.typeBoxText};
         
     }
     .word{
@@ -61,7 +63,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     .correct{
-        color: green;
+        color:  ${({theme})=>theme.title};;
     }
     .incorrect{
         color:red;
@@ -69,37 +71,44 @@ export const GlobalStyles = createGlobalStyle`
     .left-blinking-cursor{
         border-left: 1px solid;
         animation: blinking 2s infinite;
-        animation-timing-funcation: ease;
+        animation-timing-function: ease;
         @keyframes blinking{
-            0% {border-left-color:white;}
-            25% {border-left-color:black;}
-            50% {border-left-color:white;}
-            75% {border-left-color:black;}
-            100% {border-left-color:white;}
+            0% {border-left-color:${({theme})=>theme.title};}
+            25% {border-left-color:${({theme})=>theme.background};}
+            50% {border-left-color:${({theme})=>theme.title};}
+            75% {border-left-color:${({theme})=>theme.background};}
+            100% {border-left-color:${({theme})=>theme.title};}
+            // 0% {border-left-color:}
+            // 25% {border-left-color:black;}
+            // 50% {border-left-color:white;}
+            // 75% {border-left-color:black;}
+            // 100% {border-left-color:white;}
         }
     }
 
     .right-blinking-cursor{
         border-right: 1px solid;
         animation: blinkingRight 2s infinite;
-        animation-timing-funcation: ease;
+        animation-timing-function: ease;
         @keyframes blinkingRight{
-            0% {border-right-color:white;}
-            25% {border-right-color:black;}
-            50% {border-right-color:white;}
-            75% {border-right-color:black;}
-            100% {border-right-color:white;}
+            0% {border-right-color:${({theme})=>theme.title};}
+            25% {border-right-color:${({theme})=>theme.background};}
+            50% {border-right-color:${({theme})=>theme.title};}
+            75% {border-right-color:${({theme})=>theme.background};}
+            100% {border-right-color:${({theme})=>theme.title};}
         }
     }
 
     .times-menu{
         display: flex;
-        justify-content: space-between;
         max-width: 1000px;
+        justify-content: space-between;
         margin-left: auto;
         margin-right: auto;
         font-size: 20px; 
-        // padding-right: 
+        padding: 1rem;
+        color:${({theme})=>theme.typeBoxText};
+        
     }
 
     .choose-time{
@@ -109,6 +118,39 @@ export const GlobalStyles = createGlobalStyle`
 
     .set-time:hover{
         cursor:pointer;
-        color:#e3b04b;
+        color:${({theme})=>theme.title};
+    }
+
+    .stats-box{
+        display:flex;
+        max-width:1000px;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .title{
+        font-size: 20px;
+        color:${({theme})=>theme.typeBoxText};
+    }
+    .subtitle{
+        font-size:30px;
+        color:${({theme})=>theme.title};
+    }
+
+    .left-stats{
+        width:30%;
+        padding:30px;
+
+    }
+    .right-stats{
+        width:70%;
+    }
+    .footer{
+        display: flex;
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: space-between;
+        height: 60px;
     }
 `

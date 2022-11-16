@@ -1,19 +1,21 @@
-import styled from "styled-components";
+import React from "react";
 import TypingBox from "./components/TypingBox";
-import { GlobalStyles } from "./Styles/global"
-
-
-var randomWords = require('random-words')
+import { GlobalStyles } from "./Styles/global";
+import Footer from "./components/Footer";
+import { ThemeProvider } from "styled-components";
+import { ThemeMode } from "./context/ThemeContext";
 
 function App() {
-  const words = randomWords(100)
+  const {theme} = ThemeMode();
   return (
-    <div className="canvas">
-      <GlobalStyles />
-      <h1 style={{"textAlign":"center"}}>Typingtest</h1>
-      <TypingBox  words = {words}/>
-      <h1 style={{"textAlign":"center"}}>Footer</h1>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="canvas">
+        <GlobalStyles />
+        <h1 style={{ textAlign: "center" }}>Typing Test</h1>
+        <TypingBox />
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 }
 
