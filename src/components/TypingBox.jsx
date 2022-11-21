@@ -133,7 +133,7 @@ const TypingBox = () => {
       console.log("back key pressed");
 
       if (currentCharIndex !== 0) {
-        // console.log('charindex', currentCharIndex);
+        //  console.log('charindex', currentCharIndex);
         // console.log('wordspam',allChildrenSpans.length )
         if (currentCharIndex === allChildrenSpans.length) {
           console.log("length", allChildrenSpans.length);

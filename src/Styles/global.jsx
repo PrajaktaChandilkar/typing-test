@@ -63,10 +63,13 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     .correct{
-        color:  ${({theme})=>theme.title};;
+        // color:  ${({theme})=>theme.stats};
+        color: green;
+
     }
     .incorrect{
-        color:red;
+        // color:${({theme})=>theme.title};
+        color: red;
     }
     .left-blinking-cursor{
         border-left: 1px solid;
@@ -145,12 +148,31 @@ export const GlobalStyles = createGlobalStyle`
     .right-stats{
         width:70%;
     }
-    .footer{
+    .logo{
+        height:100px;
+        width:100px;
+        background: none;
+        border-radius: 50%;
+        border: none;
+        // background:pink;
+    }
+    .footer, .header{
         display: flex;
         width: 1000px;
         margin-left: auto;
         margin-right: auto;
         justify-content: space-between;
         height: 60px;
+    }
+    .footer-links{
+        gap: 20px;
+        margin:20px;
+        cursor:pointer;
+        display:flex;
+        // justify-content:space-between;
+    }
+    .link{
+        textAnchor:none;
+         color:white;
     }
 `
