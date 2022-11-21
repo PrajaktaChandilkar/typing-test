@@ -2,6 +2,8 @@ import { AccountCircleRounded } from "@mui/icons-material";
 import { AppBar, Modal, Tab, Tabs } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
+import LoginForm from "./LoginForm";
+import SignupForm from "./SignupForm";
 
 const useStyles = makeStyles(() => ({
   modal: {
@@ -44,6 +46,9 @@ const AccountIcon = () => {
               <Tab label="signup"></Tab>
             </Tabs>
           </AppBar>
+
+          {value ===0 && <LoginForm/>}
+          {value===1 && <SignupForm/>}
         </div>
       </Modal>
     </div>

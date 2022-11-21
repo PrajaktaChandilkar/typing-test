@@ -10,12 +10,14 @@ const Stats = ({ wpm, accuracy, graphData, correctChars, incorrectChars,missedCh
   //       }
   //   })
   var timeSet = new Set();
+
   const newGraph = graphData.filter((i) => {
     if (!timeSet.has[i[0]]) {
       timeSet.add(i[0]);
       return i;
     }
   });
+  
   return (
     <div className="stats-box">
       <div className="left-stats">
